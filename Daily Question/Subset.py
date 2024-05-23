@@ -65,3 +65,6 @@ class Solution:
 ques = Solution()
 result = ques.subsets([1, 2, 3])
 print(result)
+
+# Similar Question:
+# 1863: Sum of All Subset XOR Totals
