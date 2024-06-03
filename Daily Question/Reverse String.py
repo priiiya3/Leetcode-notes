@@ -40,6 +40,7 @@ class Solution1:
         while left < right:
             s[left], s[right] = s[right], s[left]
             left, right = left + 1, right - 1
+        
             
 # Solution 2:
 class Solution2:
@@ -59,10 +60,12 @@ Result2 = Solution2()
 
 
 # Test Case for solution 1:
-testcase1 = Result1.reverseString(["h","e","l","l","o"])
-print(testcase1) # expected: ["o","l","l","e","h"]
+str1 = ["h","e","l","l","o"]
+testcase1 = Result1.reverseString(str1)
+print(str1) # expected: ["o","l","l","e","h"]
 
 # Test Case for solution 2:
-testcase1 = Result2.reverseString(["H","a","n","n","a","h"])
-print(testcase1) # expected: ["h","a","n","n","a","H"]
+str2 = ["H","a","n","n","a","h"]
+testcase1 = Result2.reverseString(str2)
+print(str2) # expected: ["h","a","n","n","a","H"]
             
