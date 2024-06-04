@@ -70,3 +70,46 @@ step 3: Initialize a counter with the total number of days.
 
 The result is the number of days left in the counter, representing the days when no meetings are scheduled.
 """
+
+# Solution:
+from typing import List
+
+class Solution:
+    def countDays(self, days: int, meetings: List[List[int]]) -> int:
+        if not meetings:
+            return days
+        
+        meetings.sort()
+        
+        merged = []
+        start, end = meetings[0]
+        
+        for st, en in meetings[1:]:
+            if st <= end + 1:
+                end = max(end, en)
+            else:
+                merged.append((start, end))
+                start, end = st, en
+        
+        merged.append((start, end))
+        
+        free = days
+        
+        for start, end in merged:
+            free -= (end - start + 1)
+        
+        return free
+
+Ret = Solution()
+
+# Test Case 1:
+testcase1 = Ret.countDays(days = 10, meetings = [[5,7],[1,3],[9,10]])
+print(testcase1) # expected: 2
+
+# Test Case 2:
+testcase2 = Ret.countDays(days = 5, meetings = [[2,4],[1,3]])
+print(testcase2) # expected: 1
+
+# Test Case 3:
+testcase1 = Ret.countDays(days = 6, meetings = [[1,6]])
+print(testcase1) # expected: 0
