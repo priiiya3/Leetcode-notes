@@ -1,3 +1,4 @@
+# Day 13
 # Leetcode Problem 846: Hand of Straights
 # (Note: This question is the same as 1296: https://leetcode.com/problems/divide-array-in-sets-of-k-consecutive-numbers/)
 
@@ -28,4 +29,9 @@ Constraints:
 0 <= hand[i] <= 109
 1 <= groupSize <= hand.length
  
+"""
+
+# Approach
+"""
+Still trying to figure out the solution
 """
