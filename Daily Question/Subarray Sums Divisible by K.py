@@ -27,3 +27,23 @@ Constraints:
 -104 <= nums[i] <= 104
 2 <= k <= 104
 """
+
+class Solution:
+    def subarraysDivByK(self, nums: List[int], k: int) -> int:
+        
+        counts = Counter()
+        currSum = 0
+        res = 0
+        
+        for num in nums:
+            currSum += num
+            
+            if currSum % k == 0:
+                res += 1 
+                
+            res += counts[currSum % k]
+            print(counts, num, currSum, currSum%k, res)
+            
+            counts[currSum % k] += 1
+
+        return res
