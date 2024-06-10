@@ -131,7 +131,8 @@ Assume `nums = [4, 5, 0, -2, -3, 1]` and `k = 5`.
   - `currSum = 9`: Remainder is `9 % 5 = 4`. `counts[4] = 1`, increment `res` by 1. Now `counts = {4: 2}`, `res = 1`.
   - `currSum = 9`: Remainder is `9 % 5 = 4`. `counts[4] = 2`, increment `res` by 2. Now `counts = {4: 3}`, `res = 3`.
   - `currSum = 7`: Remainder is `7 % 5 = 2`. No new subarray found, `counts = {4: 3, 2: 1}`, `res = 3`.
-  - `currSum = 4`: Remainder is `4 % 5 = 4`. `counts[4] = 3`, increment `res` by 3. Now `counts = {4: 4, 2: 1}`, `res = 6`.
+  - `currSum = 4`:
+   Remainder is `4 % 5 = 4`. `counts[4] = 3`, increment `res` by 3. Now `counts = {4: 4, 2: 1}`, `res = 6`.
   - `currSum = 5`: Remainder is `5 % 5 = 0`. This is directly divisible by 5, increment `res` by 1. `counts[0] = 1`, `res = 7`.
 
 By the end, `res` contains the total number of subarrays whose sum is divisible by \( k \), which would be the output of the function.
