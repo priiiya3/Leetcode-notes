@@ -52,5 +52,21 @@ class Solution:
     def relativeSortArray(self, arr1: List[int], arr2: List[int]) -> List[int]:
         
         map = {} # to store count of all the elements present in the arr1
-        left, res = [], [] # left array to store extra elements of arr1 that are not present in arr2
+        extras, res = [], [] # left array to store extra elements of arr1 that are not present in arr2
         # adn res to return final resulting array
+
+        for num in arr2:
+            map[num] = 0
+
+        for num in arr1:
+            if num in map:
+                map[num] += 1
+            else:
+                extras.append(num)
+
+        for inx, val in map.items():
+            res.append(inx*val)
+        
+        res.extend(extras)
+
+        return res
