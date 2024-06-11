@@ -65,8 +65,20 @@ class Solution:
                 extras.append(num)
 
         for inx, val in map.items():
-            res.append(inx*val)
+            res.extend([inx] * val) # num * num of times num is repeated in arr1
         
+        extras.sort()  # remaining array elements of arr1 should be added in sorted order
         res.extend(extras)
 
         return res
+
+# Driver's Code
+Result = Solution()
+
+# Test Case 1
+testcase1 = Result.relativeSortArray(arr1 = [2,3,1,3,2,4,6,7,9,2,19], arr2 = [2,1,4,3,9,6])
+print(testcase1) # expected: [2,2,2,1,4,3,3,9,6,7,19]
+
+# Test Case 2
+testcase2 = Result.relativeSortArray(arr1 = [28,6,22,8,44,17], arr2 = [22,28,8,6])
+print(testcase2) # expected: [22,28,8,6,17,44]
