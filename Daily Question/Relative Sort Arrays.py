@@ -25,6 +25,24 @@ All the elements of arr2 are distinct.
 Each arr2[i] is in arr1."""
 
 ## Approach
+"""
+1. Approach Simple hai, apan na phle ek dictionary lenge jisme store krenge arr ke har array element ka count.
+Taaki apne ko pta ho konsa element kitne baar aya hai.
+
+2. ab apan map me phle store krenge arr2 k element, jo jo hme khojne hai arr1 me.
+
+3. phir ham arr1 me ek ek karke dekhenge...agar arr1 ka current element map me present hai to result named array me current element ko map[arr1[i]] times 
+store krenge. 
+for example: arr2: [1, 2, 3], arr1: [1,2,2,1,3, 7, 8]
+then map will be: map: {1: 2, 2: 2, 3: 1}. apan parallel me bache elements arr1 k, jo map me ni gye
+unko left naam k array me daal denge.
+
+ab ham arr2 me traverse krenge and dekhenge first element 1 hai aur uska count map me 2 hai, so result = [1, 1]
+then arr2 ak second element hai 2, so result will become, result = [1, 1, 2, 2]
+then last element 3 hai, so result will become, result = [1,2,2,2,3]
+
+ab jo arr1 k remaining element hai, jo left array me hai unko result me add kr denge
+"""
 
 ## Solution:
 from typing import List
@@ -33,4 +51,6 @@ from typing import List
 class Solution:
     def relativeSortArray(self, arr1: List[int], arr2: List[int]) -> List[int]:
         
-       map = {} # to store count of all the elements present in the arr1
+        map = {} # to store count of all the elements present in the arr1
+        left, res = [], [] # left array to store extra elements of arr1 that are not present in arr2
+        # adn res to return final resulting array
