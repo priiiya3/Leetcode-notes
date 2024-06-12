@@ -58,5 +58,27 @@ class Solution:
         """
         Do not return anything, modify nums in-place instead.
         """
+        start, mid, end = 0, 0, len(nums)-1
 
-        
+        while mid < len(nums) and end != mid:
+            if nums[mid] == 0:
+                nums[start], nums[mid] = nums[mid], nums[start] # swap the elements
+                start += 1 # move start pointer one step to right
+                mid += 1 # move mid pointer one step to right 
+            elif nums[mid] == 2:
+                nums[end], nums[mid] = nums[mid], nums[end] # swap the elements
+                end -= 1 # move end pointer one step to left    
+            else: # if nums[mid] == 1
+                mid += 1
+
+        return nums
+# Driver's Code
+Result = Solution()
+
+# Test Case 1:
+testcase1 = Result.sortColors([2,0,2,1,1,0])
+print(testcase1) # expected: [0, 0, 1, 1, 2, 2]
+
+# Test Case 2:
+testcase2 = Result.sortColors([2, 0, 1])
+print(testcase2) # expected: [0, 1, 2]
