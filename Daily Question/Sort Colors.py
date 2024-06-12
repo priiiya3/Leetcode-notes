@@ -60,7 +60,7 @@ class Solution:
         """
         start, mid, end = 0, 0, len(nums)-1
 
-        while mid < len(nums) and end != mid:
+        while mid < len(nums) and end >= mid:
             if nums[mid] == 0:
                 nums[start], nums[mid] = nums[mid], nums[start] # swap the elements
                 start += 1 # move start pointer one step to right
@@ -72,6 +72,7 @@ class Solution:
                 mid += 1
 
         return nums
+    
 # Driver's Code
 Result = Solution()
 
@@ -80,5 +81,106 @@ testcase1 = Result.sortColors([2,0,2,1,1,0])
 print(testcase1) # expected: [0, 0, 1, 1, 2, 2]
 
 # Test Case 2:
-testcase2 = Result.sortColors([2, 0, 1])
+testcase2 = Result.sortColors([2, 0, 1]) 
 print(testcase2) # expected: [0, 1, 2]
+
+
+
+
+"""
+#### Approach 1: FROM HINTS => 
+count the number of occurences of 0, 1 and 2 and add them in the new array and return
+TC: O(N) , SC: O(N)
+
+CODE:
+```
+# variables to store count of zero, one and two
+        zero, one, two = 0, 0, 0
+        
+        for i in range(len(nums)):
+            if nums[i] == 0:
+                zero += 1
+            elif nums[i] == 1:
+                one += 1
+            else:
+                two += 1
+        
+        for i in range(len(nums)):
+            if zero != 0:
+                nums[i] = 0
+                zero -= 1
+                
+            elif one != 0:
+                nums[i] = 1
+                one -= 1
+                
+            else:
+                nums[i] = 2
+                two -= 1
+```
+
+---------------------------------------------------------------------------------------------------
+#### Approach 2: Using Selection Sort =>
+ TC: O(N), SC: O(1)
+
+```
+
+        
+        for i in range(len(nums)):
+            mini = i
+            for j in range(i+1, len(nums)):
+                if nums[j] < nums[mini]:
+                    mini = j
+                    
+            # swap current and minimum element
+            nums[i], nums[mini] = nums[mini], nums[i]
+            
+        return nums
+                
+        
+```
+
+
+----------------------------------------------------------------------------------------------------
+#### Approach 3: Dutch National Flag: (One Pass)
+
+code:
+```
+def sortColors(self, nums: List[int]) -> None:
+        """
+        Dutch National Flag problem solution.
+        """
+        
+        left, right, mover = 0, len(nums) - 1, 0
+        
+        while mover <= right:
+                
+            if nums[mover] == 0:
+                nums[mover], nums[left] = nums[left], nums[mover]
+                left  += 1
+                mover += 1
+                # yha dono ko +1 kar rhe qki mover k place pe
+            # pakka 1 hi aya hoga after swap, qki apan isi baat ka to
+            # code me dhyan de rhe ki mover k left me 2 na ho sirf 0 & 1 ho
+                    
+            elif nums[mover] == 2:
+                nums[mover], nums[right] = nums[right], nums[mover]
+                right -= 1
+                # yha mover to +1 ni kar rhe qki maybe swap jo huwe h
+                # do numbers (mover & right) dono ki value 2.
+            else:
+                mover += 1
+```
+
+
+Best approach So far.
+TC: O(n), SC: O(1)
+
+
+---------------------------------------
+-----------------------------------------------------
+
+
+
+
+"""
