@@ -147,9 +147,7 @@ CODE:
 code:
 ```
 def sortColors(self, nums: List[int]) -> None:
-        """
-        Dutch National Flag problem solution.
-        """
+        # Dutch National Flag problem solution.
         
         left, right, mover = 0, len(nums) - 1, 0
         
