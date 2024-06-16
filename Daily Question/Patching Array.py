@@ -71,3 +71,6 @@ So from the above proof, we know that if we choose j, our new coverage would be 
 which means we will have greater coverage by choosing k instead of j. 
 Since j can be any positive integer smaller than k.
 """
+
+# Solution:
+# Mine written solution gave TLE. Better one is yet to understand
