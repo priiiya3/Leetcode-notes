@@ -36,30 +36,71 @@ Constraints:
 
 # Approach:
 """
-We need to find all possible sums in array. We know Sum of n natural number sis [n*(n-1)]//2.
+This Problem is similar to Problem 3185. Only diffrence is the contraints. 
+Given the constraints (array length up to 10**9), the brute force approach is impractical. 
+Instead, we can use a more efficient approach leveraging modular arithmetic and a hash map (or dictionary) to 
+count occurrences of residues modulo 24. This approach has a time complexity of O(n).
 
-Since this was a Easy Problem and first question of the contest, Brute Force will work just fine here.
+# In this we need to see that even the residual can have sum of 24. 
 
-All we need to do is take 2 for loops and for every i < j just check if nums[i]+nums[j] % 24 == 0.
-Here % sign gives remainder when (nums[i]+nums[j]) is divided by 24. If the remainder is zero that means, we have found one such set.
+1: Modular Arithmetic Insight:
+    1.a: Two numbers 𝑎 and 𝑏 sum to a multiple of 24 if (a+b)%24 == 0
+    1.b: This can be rephrased using modular arithmetic: (a%24 + b%24)%24 == 0
+    1.c: Lets call a%24 and b%24 the 'residues' of a and b respectively
 
-Keep count of all such sets and return.
+2: Residue Pair:
+    2.a: For two residues to sum to 0 modulo 24, they must either both be 0, or one must be the complement of the other within 24.
+    2.b: Example pairs of residues that sum to 24 (or 0 modulo 24):
+      (0 + 0), (1 + 23), (2 + 22), ... (21 + 3)..up to (12 + 12).
+
+3: Counting Residues:
+    3.a: Use a dictionary to count how many times each residue appears in the array.
+    3.b: For each number in the array, calculate its residue modulo 24 and update the dictionary.  
+
+4: Finding Valid Pairs:
+
+    4.a: For residue 0 and 12, pairs are formed within the same group (e.g., 0 pairs with 0, 12 pairs with 12).
+    4.b: For other residues, pairs are formed between complementary residues (e.g., residue 1 pairs with residue 23).
+    
+This way we solve this problem with the time complexity of O(n).
+
+Code me basically apne ko:
+1: sabse pahle poore array ka residue cnt nikal k map me store kr lena hai
+
+2: jin residues ki value 0 ya 12 hai, unke liye ham, [n*(n-1)]//2 karke saare pairs count kr lenge
+    (for example: if mod=12 (have freq of 3), then number of pairs = [3*(3-1)]//2 = 3.
+    AISA KYUU??????, 12 k liye (sum of n elements) wala formula kyu??..Because 12 multiplied with any number will give us a multiple of 24.
+    So we want to consider sum of all n elements. Similar reason for mod==0 too.).
+
+    3: and baaki residue values ko ham unke complimentary pairs se multiply krke saare possible pairs nikal lenge.
+    (for example if mod == 1(having cnt 3), then uska complementry mod hua :24-1= 23(lets say 23 has cnt of 2)...so number of pairs are (cnt[1]*cnt[23])=3*2=6) 
 """
 
-# Solution:
+# Solution: 
+from collections import defaultdict
 from typing import List
-
-
 class Solution:
-    def countCompleteDayPairs(self, hours: List[int]) -> int:
-        
-        cnt = 0 # var to store all possible sets
-        for i in range(len(hours)):
-            for j in range(i+1, len(hours)):
-                if (hours[i]+hours[j]) % 24 == 0:
-                    cnt += 1
+    def countCompleteDayPairs(self, nums: List[int]) -> int:
 
-        return cnt
+        map = defaultdict(int)
+        res = 0
+
+        # Count the occurrences of each residue modulo 24
+        for num in nums:
+            residue = num%24
+            map[residue] += 1
+
+        # Calculate the number of valid pairs
+        for mod in range(13): # Only need to check up to 12, because mod + (24 - mod) pairs
+            n = map[mod]
+
+            if mod == 0 or mod == 12:
+                res += (n * (n-1))//2 # For mod 0 and 12, pairs are formed within the same group
+            else:
+                 # For other mods, pairs are formed between complementary groups
+                res += (n * (map[24-mod]))
+
+        return res
 
 # Driver's Code
 Ret = Solution()
@@ -71,3 +112,4 @@ print(testcase1) # expected: 2
 # Test Case 2:
 testcase2 = Ret.countCompleteDayPairs([72, 48, 24, 3])
 print(testcase2) # expected: 3
+
