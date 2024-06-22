@@ -60,6 +60,9 @@ Return subarrays.
 """
 
 # Solution:
+from typing import List
+
+
 class Solution:
     def numberOfSubarrays(self, nums: List[int], k: int) -> int:
         
