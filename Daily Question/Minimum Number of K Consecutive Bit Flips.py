@@ -42,3 +42,7 @@ Constraints:
 
 # Approach
 ## Tried a lot, didn't get it
+
+# Solution:
+# check thiso one for understanding, the editorial one was hard to understand
+# https://leetcode.com/problems/minimum-number-of-k-consecutive-bit-flips/solutions/238609/java-c-python-one-pass-and-o-1-space/
