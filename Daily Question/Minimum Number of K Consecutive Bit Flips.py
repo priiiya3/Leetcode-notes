@@ -39,3 +39,6 @@ Constraints:
 1 <= nums.length <= 105
 1 <= k <= nums.length
 """
+
+# Approach
+## Tried a lot, didn't get it
