@@ -36,7 +36,7 @@ class TreeNode:
         self.val = val
         self.left = left
         self.right = right
-        
+
 class Solution:
     def balanceBST(self, root: TreeNode) -> TreeNode:
 
@@ -62,3 +62,11 @@ class Solution:
             node = TreeNode(inorder[mid], leftSide, rightSide)
 
             return node
+        
+# Driver's Code:
+
+Result = Solution()
+
+# # Test Case 1
+# testcase1 = Result.balanceBST(root =[1,null,2,null,3,null,4,null,null])
+# print(testcase1)
