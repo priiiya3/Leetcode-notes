@@ -27,6 +27,23 @@ The number of nodes in the tree is in the range [1, 104].
 1 <= Node.val <= 105
 """
 
+# Approach
+"""
+Approach bht easy hai. Apne ko bas aise karke binary tree ko arrange krna ho ki wo balaned binary tree ban jaye.
+
+Balanced Binary tree wo hota hai jisme depth of the two subtrees of every node never differs by more than 1.
+
+To isko solve karne k liye apan kya karenge ki:
+
+step1: pahle saare nodes ko traverse krke ek array me save kr lenge.
+
+step2: phir ham recursive call krke har particular root ko uske left aur right node se jodenge.
+
+ham start array k mid element se krenge phir, mid element ko uske left and right child se attach krke 
+ohir ham uske left side me move krenge aur wha k mid element k left and right child ko leke ek new Tree Node bnayenge, phir isko phle wale tree se attach kr denge.
+Aise krke ham dheere dheere poora tree bna lenge. 
+
+"""
 
 
 # Solution:
