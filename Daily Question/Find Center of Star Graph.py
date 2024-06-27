@@ -38,3 +38,29 @@ ham edges array k first two elements consider krengge.
 Bas we will simply check ki kya first element ke u, v me se koi ek bhi second element odf edges me present hai. 
 agar u present hai edges[1] me yani wo repeated hai yani wahi centre edge hai else its v.
 """
+
+# Solution:
+from typing import List
+
+
+class Solution:
+    def findCenter(self, edges: List[List[int]]) -> int:
+        
+        u_first, v_first = edges[0] # take the u, v edges of first element
+
+        # check if u_first of first element (i.e, edges[0]) is present in edges[1] (that is second element of edges)
+        # if it is return u_first since its repeated hence this must me centre /common egde else if its not then v_first
+        # must be the repeating one
+
+        return u_first if u_first in edges[1] else v_first # yha edges[1] hi ni 1 se n k beech kisi bhi edge par check kr skte hai, u_first, v_first me se jo common hai, wo saare me present hoga.
+    
+# Driver's Code:
+Result = Solution()
+
+# Test Case 1:
+testcase1 = Result.findCenter([[1,2],[2,3],[4,2]])
+print(testcase1) # expected 2
+
+# Test Case 2:
+testcase2 = Result.findCenter([[1,2],[5,1],[1,3],[1,4]])
+print(testcase2) # expected 1
