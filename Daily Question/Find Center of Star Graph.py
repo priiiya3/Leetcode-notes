@@ -27,3 +27,14 @@ edges[i].length == 2
 ui != vi
 The given edges represent a valid star graph.
 """
+
+# Approach:
+"""
+This is A very easy question, 2D array diya hai nx2 sixe ka. apne ko bas common edge btani hai tree ki. yani wo edge jisse baaki saari edges connected hai
+
+Simple hai bhai, since wo centre edge hai and saari edges usse connected hai, 
+ham edges array k first two elements consider krengge.
+
+Bas we will simply check ki kya first element ke u, v me se koi ek bhi second element odf edges me present hai. 
+agar u present hai edges[1] me yani wo repeated hai yani wahi centre edge hai else its v.
+"""
