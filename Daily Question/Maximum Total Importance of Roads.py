@@ -49,21 +49,28 @@ ai != bi
 There are no duplicate roads.
 """
 
+# Approach:
+"""
+Apne ko nodes ko value assign karni hai in such a manner ki unka total possible sum maximum ho. 
+Total possible sum bole to saare tarike se nodes ko connect krne ka sum.
+
+Bahot simple approach, since jis node ki degree jyada hogi wo jyada baar travel kr rhe honge ham to that means 
+highest degree wale ko agar ham biggest value assign krenge to sum maximize hoga.
+
+Hence apna solution 3 step me hoga:
+
+Step 1: Ham har node ki degree calculate krenge
+Step 2: degrees ko ascending order me arrange krenge
+Step 3: degree me start to end traverse karenge and since ye ASC order me hai start element min degree wala hai, to uski val 1 rakkhenge 
+    and total banyenge total += degree[i] * value (where value = 1 and i = 0)
+    Phir jaise jaise i increment hoga, degree badhegi to ham value ko bhi increment krenge by 1. (i.e, value +=1)
+
+"""
+
 # Solution:
+from typing import List
+
+
 class Solution:
     def maximumImportance(self, n: int, roads: List[List[int]]) -> int:
-        degree = [0] * n
-
-        for edge in roads:
-            degree[edge[0]] += 1
-            degree[edge[1]] += 1
-
-        degree.sort()
-
-        value = 1
-        total_importance = 0
-        for d in degree:
-            total_importance += value * d
-            value += 1
-
-        return total_importance
+        
