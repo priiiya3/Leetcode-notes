@@ -74,3 +74,31 @@ from typing import List
 class Solution:
     def maximumImportance(self, n: int, roads: List[List[int]]) -> int:
         
+        # step 1: count the degree of each node
+        degree = [0] * n
+        for u, v in roads:
+            degree[u] += 1
+            degree[v] += 1
+
+        # step 2: sort degree in Ascending order
+        degree.sort()
+
+        # step 3: calculate total sum
+        max_total_sum = 0
+        value = 1
+        for deg in degree:
+            max_total_sum += value * deg 
+            value += 1 # increment value by 1 for next node with higher degree
+
+        return max_total_sum
+    
+# Driver's Code:
+Result = Solution()
+
+# Test Case 1:
+testcase1 = Result.maximumImportance(5, [[0,1],[1,2],[2,3],[0,2],[1,3],[2,4]])
+print(testcase1) # expected: 43
+
+# Test Case 2:
+testcase2 = Result.maximumImportance(5, [[0,3],[2,4],[1,3]])
+print(testcase2) # expected: 20
