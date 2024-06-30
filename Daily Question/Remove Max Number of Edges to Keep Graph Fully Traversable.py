@@ -66,3 +66,91 @@ end me we will return this res if and only if alice and bob n-1 nodes ko travers
 For solution algorithm, read my this leetcode article: https://leetcode.com/problems/remove-max-number-of-edges-to-keep-graph-fully-traversable/solutions/2833526/using-union-find-python-hindi-comments/
 
 """
+
+# Solution:
+from typing import List
+
+
+class UnionFind():
+    def __init__(self, size):
+        self.root = list(range(size+1))
+        self.rank = [0] * (size+1)
+    def find(self, x):
+        if self.root[x] != x:
+            self.root[x] = self.find(self.root[x])
+        return self.root[x]
+    def union(self, x, y):
+        rootX, rootY = self.find(x), self.find(y)
+
+        if rootX == rootY: # if they have same root
+            # node x, and y are already connected
+            return False
+        elif self.rank[rootX] > self.rank[rootY]:
+            self.root[rootY] = rootX
+        else:
+            self.root[rootX] = rootY
+            self.rank[rootY] += self.rank[rootX]
+        return True
+    
+class Solution:
+    def maxNumEdgesToRemove(self, n: int, edges: List[List[int]]) -> int:
+        # initialize the Union Find object
+        uf = UnionFind(n)
+
+        # variables to count number to nodes alice, bob can access and res to count common repetetive edges
+        alice = bob = res = 0
+
+        # First we will connect the nodes of tyep 3, that allows both alice and bob to traverse
+        for type, u, v in edges:
+            if type == 3:
+                if uf.union(u, v): # # if both  u and v nodes have same root
+                    # we increment both, bcz type:3 can be traverse by both
+                    # alice and bob
+                    alice += 1
+                    bob += 1
+                else: # if roots of u and v are not connected
+                    res += 1 
+        
+        # apan copy bna lenge 3rd type edges ko connect krne k baad 
+        # qki ab yha se hme dono k liye individually check krna hai ki saari
+        # bachi nodes both alice & bob, dono ko reachable ko.. yani use node
+        # par green and red dono lines ho.
+        rootCopy = uf.root[::]
+
+        # Case 2: Alice, i.e, type 1 wali edges
+        for type, u, v in edges:
+            if type == 1:
+                if uf.union(u, v): # yani u and v k common root node hai.
+                    alice += 1 # since ye node sirf alice travel kr skti hai, it has red line
+                else: # 
+                    res += 1
+        
+        
+        # alice k traversal k baad ham root ki value phir se usse stage pr
+        # re-set krenge jab sirf type : 3 connections hue thay
+        uf.root = rootCopy
+
+        # Case 3: BOB i.e, type 2
+        for type, u, v in edges:
+            if type == 2:
+                if uf.union(u, v):
+                    bob += 1
+                else:
+                    res += 1
+
+        return res if alice == bob == n-1 else -1 # since agr alice ya bob ka cnt n-1 ni hoga that means aisi koi node hai jisko they are not able to traverse
+
+# Driver's Code:
+Result = Solution()
+
+# Test Case 1:
+testcase1 = Result.maxNumEdgesToRemove(n=4, edges=[[3,1,2],[3,2,3],[1,1,3],[1,2,4],[1,1,2],[2,3,4]])
+print(testcase1) # expected: 2
+
+# Test Case 2:
+testcase2 = Result.maxNumEdgesToRemove(n=4, edges=[[3,1,2],[3,2,3],[1,1,4],[2,1,4]])
+print(testcase2) # expected: 0
+
+# Test Case 3:
+testcase3 = Result.maxNumEdgesToRemove(n=4, edges = [[3,2,3],[1,1,2],[2,3,4]])
+print(testcase3) # expected: -1
