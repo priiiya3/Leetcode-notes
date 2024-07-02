@@ -31,3 +31,10 @@ What if the given array is already sorted? How would you optimize your algorithm
 What if nums1's size is small compared to nums2's size? Which algorithm is better?
 What if elements of nums2 are stored on disk, and the memory is limited such that you cannot load all elements into the memory at once?
 """
+
+# Approach:
+"""
+Mujhe easiest approach ye laga ki main pahle ek hashmap me first array k har element ki frequency store karlu
+Phir second array me traverse krke check karu ki second array ka elment i, kya mere hashmap me hai, agar hai to 
+add it into my res array
+"""
