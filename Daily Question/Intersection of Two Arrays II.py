@@ -40,6 +40,7 @@ add it into my res array
 """
 
 # Solution:
+from collections import Counter
 from typing import List
 
 
