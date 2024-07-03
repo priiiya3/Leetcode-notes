@@ -47,3 +47,48 @@ Constraints:
 1 <= nums.length <= 105
 -109 <= nums[i] <= 109
 """
+
+# Approach:
+"""
+Easy approach. hame mainly minimum diffrence return karna hai. aur yha bola hai replace with any value, 
+which basically means ki sabse largest/ ya smallest value ko ham delete krke minimize kar rhe sum.
+
+Ye minimum sum paane ka 4 cases hai. Pahle ham array sort karenge phir:
+1: Removing the three largest elements.
+2: Removing the two largest and one smallest elements.
+3: Removing one largest and two smallest elements.
+4: Removing the three smallest elements
+
+"""
+
+# Solution:
+from typing import List
+
+
+class Solution:
+    def minDifference(self, nums: List[int]) -> int:
+        n = len(nums)
+
+        if n <= 4:
+            return 0
+        
+        nums.sort()
+
+        mini = float('inf')
+
+        for left in range(4):
+            right = n - 4 + left
+            mini = min(mini, nums[right]-nums[left])
+
+        return mini
+    
+# Driver's Code:
+Result = Solution()
+
+# Test Case 1:
+testcase1 = Result.minDifference([5, 3, 2, 4])
+print(testcase1) # expected: 0
+
+# Test Case 2:
+testcase2 = Result.minDifference([1,5,0,10,14])
+print(testcase2) # expected: 1
