@@ -30,3 +30,9 @@ Constraints:
 2 <= n <= 1000
 1 <= time <= 1000
 """
+
+# Approach:
+"""
+After reading the problem i am sure ki maine isko pahle bhi kabhi kisi contest me recently solve kara hai.
+
+"""
