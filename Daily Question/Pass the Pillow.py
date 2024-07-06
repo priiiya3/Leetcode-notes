@@ -34,5 +34,5 @@ Constraints:
 # Approach:
 """
 After reading the problem i am sure ki maine isko pahle bhi kabhi kisi contest me recently solve kara hai.
-
+Only do it when u find that problem, qki main bht sure hu ye ussi same code se hoga
 """
